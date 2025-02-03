@@ -57,6 +57,15 @@ body {
     font-size: 30px;
 }
 
+.operator {
+    background-color: darkgoldenrod;
+}
+
+.equals {
+    background-color: darkblue;
+    color: white;
+}
+
 .clear {
     width: 100%;
     height: 50px;
