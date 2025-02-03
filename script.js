@@ -1,7 +1,7 @@
 const add = (num1, num2) => num1 + num2;
 const subtract = (num1, num2) => num1 - num2;
 const multiply  = (num1, num2) => num1 * num2;
-const divide = (num1, num2) => (num2 !== 0 ? num1 / num2 : "ERROR do not THE 0");
+const divide = (num1, num2) => (num2 !== 0 ? num1 / num2 : "NO NO ZERO!");
 
 let num1 = "";
 let num2 = "";
@@ -16,18 +16,35 @@ const operate = function(num1, num2, operator) {
     num1 = parseFloat(num1);
     num2 = parseFloat(num2);
 
+    let result;
     switch (operator) {
         case "+":
-            return add(num1, num2);
+            result =  add(num1, num2);
+            break;
         case "-":
-            return subtract(num1, num2);
+            result =  subtract(num1, num2);
+            break;
         case "*":
-            return multiply(num1, num2);
+            result =  multiply(num1, num2);
+            break;
         case "/":
-            return divide(num1, num2);
+            result =  divide(num1, num2);
+            break;
         default:
             return "ERROR";
     }
+
+    return formatResult(result);
+};
+
+const formatResult = (result) => {
+    let stringResult = result.toString();
+
+    if (stringResult.includes(".")) {
+        return stringResult.slice(0, 13);
+    }
+
+    return stringResult.length > 13 ? stringResult.slice(0, 13) : stringResult;
 };
 
 numberButtons.forEach(button => {
@@ -35,11 +52,15 @@ numberButtons.forEach(button => {
         let value = e.target.textContent;
        
         if (!operator) {
-            num1 += value;
-            display.textContent = num1;
+            if (num1.length < 13) {
+                num1 += value;
+                display.textContent = num1;
+            }
         } else {
-            num2 += value;
-            display.textContent = num2;
+            if (num2.length < 15) {
+                num2 += value;
+                display.textContent = num2;
+            }
         }
         
     })
