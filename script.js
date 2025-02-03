@@ -11,6 +11,7 @@ let numberButtons = document.querySelectorAll(".operand");
 let clearButton = document.querySelector(".clear");
 let operatorButtons = document.querySelectorAll(".operator");
 let equals = document.querySelector(".equals");
+let decimalButton = document.querySelector(".decimal");
 
 const operate = function(num1, num2, operator) {
     num1 = parseFloat(num1);
@@ -64,6 +65,20 @@ numberButtons.forEach(button => {
         }
         
     })
+});
+
+decimalButton.addEventListener("click", () => {
+    if (!operator) {
+        if (!num1.includes(".")) {
+            num1 = num1 === "" ? "0." : num1 + ".";
+            display.textContent = num1;
+        }
+    } else {
+        if (!num2.includes(".")) {
+            num2 = num2 === "" ? "0." : num2 + ".";
+            display.textContent = num2;
+        }
+    }
 });
 
 operatorButtons.forEach(button => {
